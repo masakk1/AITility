@@ -1,6 +1,6 @@
 # WARNING! 
 1. ONLY THE CHAT WORKS WELL CURRENTLY
-2. The docs are not made for Windows! This was made with Fedora. A port will soon be done. 
+2. The docs are not made for Windows! This was made with Fedora Linux. A port will soon be done. 
 3. This is a pre-release and you will encounter errors and nonsense. You can help a lot by **opening an issue**.
 
 # Info
@@ -43,7 +43,7 @@ I will for sure change this later on but it's a first.
 sudo pip3 install .
 ```
 
-3. After that you can run AIT by typing `aitility` or `ait` on command line 
+3. After that you can run AIT by typing `aitility` or `ait` on the command line, 
 
 # Using
 ## CURRENTLY ONLY CHAT WORKS WELL NOW.

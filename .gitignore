@@ -1,7 +1,5 @@
-# Ignore g4f repo stuff
-g4f_repo/*
-
-# Build
+# Ignore installation leftovers
+aitility.egg-info/*
 build/*
 
 # environment
