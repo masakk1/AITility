@@ -1,0 +1,9 @@
+click
+rich
+click
+typing
+fake_useragent
+pydantic
+requests
+retrying
+tls_client

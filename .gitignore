@@ -1,0 +1,8 @@
+# Ignore g4f repo stuff
+g4f_repo/*
+
+# Build
+build/*
+
+# environment
+.venv/*

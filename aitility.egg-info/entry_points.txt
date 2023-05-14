@@ -1,0 +1,3 @@
+[console_scripts]
+ait = aitility.cli:main
+aitility = aitility.cli:main
