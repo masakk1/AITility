@@ -17,6 +17,10 @@ def main():
 @click.option("--verbose", is_flag=True)
 @click.argument("prompt", nargs=-1)
 def question(verbose, prompt):
+    """
+    Ask a question to AITility. Add your prompt between double quotes "".
+    Use the '--verbose' flag to get a longer and more detailed answer. 
+    """
     prompt_context = client.get_prompt_preset("question", verbose)
 
     question = prompt_context + " Question: " + prompt[0] + "\nAnswer: "
@@ -29,6 +33,9 @@ def question(verbose, prompt):
 @click.option("--verbose", is_flag=True)
 @click.argument("prompt", nargs=-1)
 def fix(verbose, prompt):
+    """
+    [WIP!] Tries its best to fix a command you gave it. Type your command surrounded by double quotes "".
+    """
     prompt_context = client.get_prompt_preset("fix", verbose)
 
     question = prompt_context + " Question: " + prompt[0] + "\nAnswer: "
@@ -40,6 +47,9 @@ def fix(verbose, prompt):
 @main.command()
 @click.argument("prompt", nargs=-1)
 def complete(prompt):
+    """
+    [WIP!] Gives some suggestions to complete your command. Type an uncomplete command surrounded by double quotes "".
+    """
     prompt_context = client.get_prompt_preset("complete", False)
 
     question = prompt_context + " " + prompt[0] + "\nAnswer: "
@@ -51,6 +61,10 @@ def complete(prompt):
 @main.command()
 @click.argument("initial_prompt", nargs=-1)
 def chat(initial_prompt):
+    """
+    Activates the chat. Type /quit to quit.
+    If you wish, you can give an initial prompt surrounded by double quotes ""
+    """
     print(
         "[bold green]Chat mode [italic yellow]activated[/italic yellow].\nWrite a message or press [italic yellow]/quit[/italic yellow] to quit"
     )

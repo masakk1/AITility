@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-
+# Setup info
 with open("README.md") as f:
     readme = f.read()
 
@@ -8,17 +8,28 @@ with open("LICENSE") as f:
     license = f.read()
 
 setup(
+    # Author
     author="masak1",
+    # Version control
     name="aitility",
-    version="0.0.1",
+    version="0.0.2",
     description="AITility is an AI tool for your CLI.",
     long_description=readme,
     license=license,
-    packages=find_packages(),
+    # Manifest
+    use_scm_version=True,
+    setup_requires=["setuptools_scm"],
+    # Packages
+    packages=find_packages(where="aitility"),
+    package_dir={"": "aitility"},
+    include_package_data=True,
     install_requires=[
+        # aitility
         "click",
         "rich",
-        "click",
+        "pyxdg",
+        "PyYAML",
+        # requests
         "typing",
         "fake_useragent",
         "pydantic",
@@ -32,5 +43,4 @@ setup(
             "ait = aitility.cli:main",
         ],
     },
-    # packages=find_packages(exclude=("tests", "docs")),
 )

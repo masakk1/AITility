@@ -1,66 +1,60 @@
 from rich.console import Console
 from rich.panel import Panel
-from rich.text import Text
 from rich.markdown import Markdown
 from rich.prompt import Prompt
+
+from xdg.BaseDirectory import xdg_config_home
+import yaml
+import os
+from os.path import exists
+
 from . import you
 
 console = Console()
 
-# Look for prompt_presets.ini
-from configparser import ConfigParser
-import os.path
 
-dir_path = os.path.dirname(os.path.realpath(__file__))
-presets_filepath = dir_path + "/prompt_presets.ini"
+def read_config() -> dict:
+    # find a filepath
+    filepath = os.path.join(xdg_config_home, "aitility", "config.yaml")
 
-# check if the config file exists
-prompt_presets_exists = os.path.exists(presets_filepath)
-prompt_presets = None
+    print(exists(filepath))
+    if not exists(filepath):
+        print("[INFO] No *local* config found at " + filepath)
+        # print("[INFO] Type 'aitility --config-warning=off' to stop receiving this message") # TODO: Actually write this
+        # THIS DOESNT WORK IF ITS NOT INSTALLED TO ROOT - THIS IS WHATS GOTTA BE FIXED.
+        filepath = os.path.join(os.path.dirname(__file__), "config.yaml")
 
-if not prompt_presets_exists:
-    print(
-        "[WARNING!] Presets not found on path: ",
-        presets_filepath,
-        " \n AITility won't use prompt presets.",
-    )
-else:
-    prompt_presets = ConfigParser()
-    prompt_presets.read(presets_filepath)
+    # Otherwise return config
+    with open(filepath, "r") as f:
+        config = yaml.safe_load(f)
+
+    return config
 
 
-def get_prompt_preset(name: str, verbose: bool):
-    if not prompt_presets_exists:
-        return ""
+def get_prompt_preset(name: str, verbose: bool) -> str:
+    config = read_config()
+    prompt_presets = config["prompt_presets"]
 
-    container = "normal"
+    prompt_type = "normal"
     if verbose:
-        container = "verbose"
+        prompt_type = "verbose"
 
-    return prompt_presets[container][name]
-
-
-def md_to_text(md):
-    html = markdown(md)
-    soup = BeautifulSoup(html, features="html.parser")
-    return soup.get_text()
+    return prompt_presets[name][prompt_type]
 
 
-def display_message(sender, message, is_bot=False):
+def display_message(sender, message) -> None:
     formatted_message = Markdown("**" + sender + "**" + ":\n" + message)
     panel = Panel(formatted_message, border_style="yellow")
     console.print(panel)
 
 
-def ask_user():
+def ask_user() -> str:
     prompt = Prompt.ask("[bold yellow]You[/bold yellow]")
     return prompt
 
 
-def request(prompt: str, chat: list = None) -> str:
-    with console.status(
-        "[bold yellow]Generating an answer...", spinner="material"
-    ) as status:
+def request(prompt: str, chat: list | None = None) -> str:
+    with console.status("[bold yellow]Generating an answer...", spinner="material"):
         response = you.Completion.create(
             prompt=prompt,
             detailed=True,

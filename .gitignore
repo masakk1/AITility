@@ -1,5 +1,8 @@
 # Ignore installation leftovers
 aitility.egg-info/*
+aitility/aitility.egg-info/*
+aitility/__pycache__/*
+.eggs/*
 build/*
 
 # environment

@@ -1,0 +1,19 @@
+prompt_presets:
+  question:
+    normal: You are going to answer a question. Be very short and concise!
+    verbose: You are going to answer a question. Elaborate every step!
+
+  fix:
+    normal: You are going to explain to the user why their command might throw an error. Be very short and concise!
+    verbose: You are going to explain to the user why their command might throw an error. Elaborate every step!         
+
+  complete:
+    normal: |
+      You are going to complete the following command provided to you. write ONLY completitions, text is NOT ALLOWED.
+      Give more than one suggestion if you are insecure.
+      Example:
+      cmd: ech
+      Answer: echo ""
+
+      your turn now!
+      cmd:
