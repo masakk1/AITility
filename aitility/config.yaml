@@ -1,19 +1,157 @@
 prompt_presets:
   question:
-    normal: You are going to answer a question. Be very short and concise!
-    verbose: You are going to answer a question. Elaborate every step!
-
-  fix:
-    normal: You are going to explain to the user why their command might throw an error. Be very short and concise!
-    verbose: You are going to explain to the user why their command might throw an error. Elaborate every step!         
-
-  complete:
     normal: |
-      You are going to complete the following command provided to you. write ONLY completitions, text is NOT ALLOWED.
-      Give more than one suggestion if you are insecure.
-      Example:
-      cmd: ech
-      Answer: echo ""
+      Instructions: Please provide short answers to the following programming questions. Your answers should be concise and to the point, but still answer the question accurately. Use the format Q:  A: . Here are some examples:
 
-      your turn now!
-      cmd:
+      Q: What is Python? A: Python is a high-level programming language.
+
+      Q: What is a variable? A: A variable is a container for storing data in computer memory.
+
+      Q: What is a loop in programming? A: A loop in programming is a way to execute a set of instructions repeatedly.
+      
+      Now you try! Please answer the following question:
+
+      Q:       
+
+    verbose: |
+      To get started, please answer the question given to you below. Your answer should be as long as needed to fully answer the question, and should include steps, code snippets and a detailed guide to help the user.
+
+      Q: How do I add an element to an array in JavaScript? A:
+
+      To add an element to an array in JavaScript, you can use the push() method.
+      Here's an example:
+
+      ```javascript
+       let myArray = [1, 2, 3];
+       myArray.push(4);
+       console.log(myArray); // Output: [1, 2, 3, 4]
+      ```
+
+      Alternatively, you can also use the splice() method to add elements at
+      specific positions in the array. Here's an example:
+
+      ```javascript
+       let myArray = [1, 2, 3];
+       myArray.splice(1, 0, 4);
+       console.log(myArray); // Output: [1, 4, 2, 3]
+      ```
+
+      Now you try!
+
+      Q:
+
+    fix:
+      normal: |
+        When running terminal commands or a script, your input may cause errors that are difficult to identify. To help you diagnose issues, please enter your command below along with any relevant arguments. 
+
+        Please note that the answers you provide should be short and to the point. Here's an example format you can use to help guide your answers:
+
+        command: <command>
+        possible errors: <error1>, <error2>, ...
+        possible fixes: <fix1>, <fix2>, ...
+
+        Here are some examples to help get you started:
+
+        command: ls
+        possible errors: command not found
+        possible fixes: try installing the command or check your PATH
+
+        command: rm file.txt
+        possible errors: permission denied when trying to remove file
+        possible fixes: use sudo before the command or check file permissions
+
+        command: mkdir new_directory
+        possible errors: directory already exists
+        possible fixes: remove or rename the existing directory, or use a different name for the new directory
+
+        Now you try!
+
+        command:
+
+      verbose: |
+        To avoid errors, make sure to follow these instructions carefully. The examples below demonstrate different scenarios where errors may occur, along with possible fixes.
+
+        Remember that your answers should be as detailed as necessary, including steps, guides, and code snippets as needed.
+
+        Examples:
+
+        Command: sudo apt-get update
+        Possible error: Could not get lock /var/lib/dpkg/lock-frontend
+
+        Possible fix:
+        This error occurs when another process is using apt-get. Use the following command to check which process is using it:
+        `sudo lsof /var/lib/dpkg/lock-frontend`
+
+        Possible error: Some index files failed to download
+
+        Possible fix:
+        This error may occur when the repository URL is incorrect or unreachable. First, check if the URL is correct. If it is, try to update using the following command:
+        `sudo apt-get clean && sudo apt-get update`
+
+        Command: git pull
+        Possible error: Your local changes to the following files would be overwritten by merge
+
+        Possible fix:
+        This error occurs when there are uncommitted changes in the local repository. You can either commit the changes or stash them using the following command:
+        `git stash`
+
+        Possible error: There is no tracking information for the current branch
+
+        Possible fix:
+        This error occurs when you are not on a branch with a remote tracking branch. Create a new branch that tracks the remote branch using the following command:
+        `git checkout -b <new-branch-name> --track origin/<remote-branch-name>`
+
+        Now you try!
+
+        command:
+
+      complete:
+        normal: |
+          Here are some suggestions on how to complete different command line commands. The answers should be extremely short to fit the command line. Please choose the most suitable completions for your command.
+
+          Example 1: 
+          Uncompleted command: git 
+          1: git add (Add file contents to index)
+          2: git commit (Record changes to the repository)
+          3: git push (Update remote refs along with associated objects)
+          4: git clone (Clone a repository into a new directory)
+          5: git branch (List, create, or delete branches)
+
+          Example 2:
+          Uncompleted command: cd 
+          1: cd .. (Move up one directory)
+          2: cd /path (Move to directory /path)
+          3: cd ~ (Move to home directory)
+          4: cd - (Move to the previous directory)
+          5: cd ./ (Move to the current directory)
+
+          Example 3:
+          Uncompleted command: ls 
+          1: -l (Long format)
+          2: -a (Include hidden files)
+          3: -t (Sort by modification time)
+          4: -S (Sort by file size)
+          5: -h (Human-readable sizes)
+
+          Now you try!
+
+
+# prompt_presets:
+#   question:
+#     normal:  You are going to answer a question. Be very short and concise!
+#     verbose: You are going to answer a question. Elaborate every step!
+#
+#   fix:
+#     normal:  You are going to explain to the user why their command might throw an error. Be very short and concise!
+#     verbose: You are going to explain to the user why their command might throw an error. Elaborate every step!         
+#
+#   complete:
+#     normal: |
+#       You are going to complete the following command provided to you. write ONLY completitions, text is NOT ALLOWED.
+#       Give more than one suggestion if you are insecure.
+#       Example:
+#       cmd: ech
+#       Answer: echo ""
+#
+#       your turn now!
+#       cmd:
