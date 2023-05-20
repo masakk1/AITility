@@ -1,10 +1,10 @@
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/masakk1/AITility?sort=semver&style=for-the-badge)
 
 # WARNING!
-
-1. The docs are not made for Windows! This was made with Linux. A port will be
+1. You DON'T need any tokens or keys to use ait. This is completely free and open source!
+2. The docs are not made for Windows! This was made with Linux. A port will be
    done eventually.
-2. This is a pre-release and you will encounter errors and nonsense. You can
+3. This is a pre-release and you will encounter errors and nonsense. You can
    help a lot by **opening an issue**.
 
 # Info
@@ -26,6 +26,7 @@
 > These are just for me, they might change in the future or be removed.
 
 - [ ] Release the binaries directly
+- [ ] Solve the need for "sudo" and add it to path directly
 - [x] Make use of a custom config file
 - [ ] Expand the config file
 - [ ] Redesign the fix command
@@ -74,6 +75,7 @@ toggle, which just means a longer answer.\
 Sometimes it will return `retry` a bunch of times and then not answer, running
 the same command again usually works. This might get worked on in a future
 release.
+> 📝 **Note:** Check the EXAMPLES.md for the results!
 
 ## Question
 
@@ -81,7 +83,7 @@ AIT will return an answer to the question. It won't remember what you told it if
 you ask it again, use the `chat` command for that. This command has a
 `--verbose` toggle, if you wish for a longer answer.
 
-> ProTip: If regret not adding `--verbose`, press the up arrow and type `-v` at
+> 💡 **ProTip**: If regret not adding `--verbose`, press the up arrow and type `-v` at
 > the end!
 
 Here is an example question:
