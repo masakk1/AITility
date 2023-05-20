@@ -29,13 +29,13 @@
 - [x] Make use of a custom config file
 - [ ] Expand the config file
 - [ ] Redesign the fix command
-- [ ] Add custom presets
+- [ ] Add custom presets (custom cmds with presets)
 - [ ] Add command aliases
 - [ ] Publish to some common distros or package managers
 - [ ] Better implementation for requests
 - [ ] Adding more AI models
 - [ ] Add support for windows
-- [ ] Add an option to run a command from a completition
+- [ ] Add an option to run a command from a completition or fix
 
 # Installing
 
@@ -69,8 +69,8 @@ ait question "What does fetching do on git?"
 
 # Using
 
-Currently there are 4 commands and two of them have a `--verbose` toggle, which
-just means a longer answer.\
+Currently there are 4 commands and two of them have a `--verbose` (or `-v`)
+toggle, which just means a longer answer.\
 Sometimes it will return `retry` a bunch of times and then not answer, running
 the same command again usually works. This might get worked on in a future
 release.
@@ -81,15 +81,15 @@ AIT will return an answer to the question. It won't remember what you told it if
 you ask it again, use the `chat` command for that. This command has a
 `--verbose` toggle, if you wish for a longer answer.
 
-> ProTip: If regret not adding `--verbose`, press the up arrow and type
-> `--verbose` at the end!
+> ProTip: If regret not adding `--verbose`, press the up arrow and type `-v` at
+> the end!
+
+Here is an example question:
 
 ```bash
-$ ait question "What is 10 + 5?"
-# ╭──────────────────────────────────╮
-# │ Bot: The answer to the question  │
-# │ "What is 10 + 5?" is 15.         │
-# ╰──────────────────────────────────╯
+$ ait question "How can I clone a github repo?"
+# or with verbose
+$ ait question "How can I clone a github repo?" -v
 ```
 
 ## Fix
@@ -98,34 +98,33 @@ AIT will try its best to fix the command you've given to it. This is still an
 program, and results are not very good on this command.\
 This command has a `--verbose` toggle, if you wish for a longer answer.
 
-**TODO: Add code example**
+Here are some examples:
+
+```bash
+$ ait fix "rm aitility/"
+# or with verbose
+$ ait fix "rm aitility/" -v
+```
 
 ## Complete
 
 Given the command you want to complete, it will return some suggestions.
 Currently it only _shows_ the suggestions and you'll have to copy-paste it.
 
-**TODO: Add code example**
+```bash
+$ ait complete "ssh "
+```
 
 ## Chat
 
 This command will allow you to enter a chat and have a conversation with the AI.
 You can pass a string like with any other command, but it isn't needed.
 
-````bash
+```bash
 $ ait chat
-# Write a message or press /quit to quit
-# You: How can I print a string in python? Be short
-# ╭─────────────────────────────────────────────────────────────────────────────────────╮
-# │ Bot: You can print a string in Python by using the print() function. For example:   │
-# │                                                                                     │
-# │ ```                                                                                 │
-# │ print("Hello, world!")                                                              │
-# │ ```                                                                                 │
-# │                                                                                     │
-# │ This will output the string "Hello, world!" to the console.                         │
-# ╰─────────────────────────────────────────────────────────────────────────────────────╯
-````
+# and with an initial prompt
+$ ait chat "How can I print a string in python?"
+```
 
 # Contributing
 

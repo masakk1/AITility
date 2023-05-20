@@ -1,24 +1,25 @@
 prompt_presets:
+  init:
+    You are AITility, an AI-powered tool for the terminal. I'll give you some instructions now.
   question:
     normal: |
       Instructions: Please provide short answers to the following programming questions. Your answers should be concise and to the point, but still answer the question accurately. Use the format Q:  A: . Here are some examples:
 
       Q: What is Python? A: Python is a high-level programming language.
-
       Q: What is a variable? A: A variable is a container for storing data in computer memory.
-
       Q: What is a loop in programming? A: A loop in programming is a way to execute a set of instructions repeatedly.
       
       Now you try! Please answer the following question:
 
-      Q:       
+      Q: %s 
+      (you don't have to write the question nor the A at the beginning.)
 
     verbose: |
       To get started, please answer the question given to you below. Your answer should be as long as needed to fully answer the question, and should include steps, code snippets and a detailed guide to help the user.
 
       Q: How do I add an element to an array in JavaScript? A:
 
-      To add an element to an array in JavaScript, you can use the push() method.
+      A: To add an element to an array in JavaScript, you can use the push() method.
       Here's an example:
 
       ```javascript
@@ -37,104 +38,105 @@ prompt_presets:
       ```
 
       Now you try!
+      Q: %s
 
-      Q:
+  fix:
+    normal: |
+      When entering a terminal command or running a script, you may encounter errors that prevent successful execution. To help you troubleshoot these issues, please provide the command you entered and any error messages you received.
 
-    fix:
-      normal: |
-        When running terminal commands or a script, your input may cause errors that are difficult to identify. To help you diagnose issues, please enter your command below along with any relevant arguments. 
+      Note: Your responses should be brief and to the point, aiming to provide accurate information quickly.
 
-        Please note that the answers you provide should be short and to the point. Here's an example format you can use to help guide your answers:
+      Example 1:
+      command: ls
+      possible error 1: ls: cannot access 'file': No such file or directory
+      possible fixes: Check that the file exists and is spelled correctly.
+      Example 2:
+      command: git status
+      possible error 1: fatal: not a git repository (or any of the parent directories): .git
+      possible fixes: Make sure you are in the correct directory or initialize a new git repository.
+      possible error 2: Your branch is behind 'origin/master' by X commits.
+      possible fixes: Use 'git pull' to update your local repository.
 
-        command: <command>
-        possible errors: <error1>, <error2>, ...
-        possible fixes: <fix1>, <fix2>, ...
+      Example 3:
+      command: python3 script.py
+      possible error 1: ModuleNotFoundError: No module named 'numpy'
+      possible fixes: Install numpy using 'pip install numpy'
+      possible error 2: IndentationError: unexpected indent
+      possible fixes: Check your indentation and make sure it is consistent.
 
-        Here are some examples to help get you started:
+      Now you try!
+      command: %s
 
-        command: ls
-        possible errors: command not found
-        possible fixes: try installing the command or check your PATH
+    verbose: |
+      To avoid errors, make sure to follow these instructions carefully. The examples below demonstrate different scenarios where errors may occur, along with possible fixes.
 
-        command: rm file.txt
-        possible errors: permission denied when trying to remove file
-        possible fixes: use sudo before the command or check file permissions
+      Remember that your answers should be as detailed as necessary, including steps, guides, and code snippets as needed.
 
-        command: mkdir new_directory
-        possible errors: directory already exists
-        possible fixes: remove or rename the existing directory, or use a different name for the new directory
+      Examples:
 
-        Now you try!
+      Command: sudo apt-get update
+      Possible error: Could not get lock /var/lib/dpkg/lock-frontend
 
-        command:
+      Possible fix:
+      This error occurs when another process is using apt-get. Use the following command to check which process is using it:
+      `sudo lsof /var/lib/dpkg/lock-frontend`
 
-      verbose: |
-        To avoid errors, make sure to follow these instructions carefully. The examples below demonstrate different scenarios where errors may occur, along with possible fixes.
+      Possible error: Some index files failed to download
 
-        Remember that your answers should be as detailed as necessary, including steps, guides, and code snippets as needed.
+      Possible fix:
+      This error may occur when the repository URL is incorrect or unreachable. First, check if the URL is correct. If it is, try to update using the following command:
+      `sudo apt-get clean && sudo apt-get update`
 
-        Examples:
+      Command: git pull
+      Possible error: Your local changes to the following files would be overwritten by merge
 
-        Command: sudo apt-get update
-        Possible error: Could not get lock /var/lib/dpkg/lock-frontend
+      Possible fix:
+      This error occurs when there are uncommitted changes in the local repository. You can either commit the changes or stash them using the following command:
+      `git stash`
 
-        Possible fix:
-        This error occurs when another process is using apt-get. Use the following command to check which process is using it:
-        `sudo lsof /var/lib/dpkg/lock-frontend`
+      Possible error: There is no tracking information for the current branch
 
-        Possible error: Some index files failed to download
+      Possible fix:
+      This error occurs when you are not on a branch with a remote tracking branch. Create a new branch that tracks the remote branch using the following command:
+      `git checkout -b <new-branch-name> --track origin/<remote-branch-name>`
 
-        Possible fix:
-        This error may occur when the repository URL is incorrect or unreachable. First, check if the URL is correct. If it is, try to update using the following command:
-        `sudo apt-get clean && sudo apt-get update`
+      Now you try!
+      Command: %s
 
-        Command: git pull
-        Possible error: Your local changes to the following files would be overwritten by merge
+  complete:
+    normal: |
+      You are going to give the user suggestions on how the command they will provide completes. Your answers should be concise and to the point, but still answer the question accurately. Use the format below. Restain yourself from saying anything that isn't a suggestion, only suggestions numbered Here are some examples:
 
-        Possible fix:
-        This error occurs when there are uncommitted changes in the local repository. You can either commit the changes or stash them using the following command:
-        `git stash`
+      Example 1: 
+      Uncompleted command: git 
+      1. git add (Add file contents to index)
+      2. git commit (Record changes to the repository)
+      3. git push (Update remote refs along with associated objects)
+      4. git clone (Clone a repository into a new directory)
+      5. git branch (List, create, or delete branches)
 
-        Possible error: There is no tracking information for the current branch
+      Example 2:
+      Uncompleted command: cd 
+      1. cd .. (Move up one directory)
+      2. cd /path (Move to directory /path)
+      3. cd ~ (Move to home directory)
+      4. cd - (Move to the previous directory)
+      5. cd ./ (Move to the current directory)
 
-        Possible fix:
-        This error occurs when you are not on a branch with a remote tracking branch. Create a new branch that tracks the remote branch using the following command:
-        `git checkout -b <new-branch-name> --track origin/<remote-branch-name>`
+      Example 3:
+      Uncompleted command: ls 
+      1. -l (Long format)
+      2. -a (Include hidden files)
+      3. -t (Sort by modification time)
+      4. -S (Sort by file size)
+      5. -h (Human-readable sizes)
 
-        Now you try!
+      Now you try!
+      Uncompleted command: %s
 
-        command:
 
-      complete:
-        normal: |
-          Here are some suggestions on how to complete different command line commands. The answers should be extremely short to fit the command line. Please choose the most suitable completions for your command.
-
-          Example 1: 
-          Uncompleted command: git 
-          1: git add (Add file contents to index)
-          2: git commit (Record changes to the repository)
-          3: git push (Update remote refs along with associated objects)
-          4: git clone (Clone a repository into a new directory)
-          5: git branch (List, create, or delete branches)
-
-          Example 2:
-          Uncompleted command: cd 
-          1: cd .. (Move up one directory)
-          2: cd /path (Move to directory /path)
-          3: cd ~ (Move to home directory)
-          4: cd - (Move to the previous directory)
-          5: cd ./ (Move to the current directory)
-
-          Example 3:
-          Uncompleted command: ls 
-          1: -l (Long format)
-          2: -a (Include hidden files)
-          3: -t (Sort by modification time)
-          4: -S (Sort by file size)
-          5: -h (Human-readable sizes)
-
-          Now you try!
-
+# Isn't it funny how the new presets are written by the AI, for itself.
+# old presets
 
 # prompt_presets:
 #   question:

@@ -17,11 +17,9 @@ def read_config() -> dict:
     # find a filepath
     filepath = os.path.join(xdg_config_home, "aitility", "config.yaml")
 
-    print(exists(filepath))
     if not exists(filepath):
-        print("[INFO] No *local* config found at " + filepath)
+        # print("[INFO] No *local* config found at " + filepath)
         # print("[INFO] Type 'aitility --config-warning=off' to stop receiving this message") # TODO: Actually write this
-        # THIS DOESNT WORK IF ITS NOT INSTALLED TO ROOT - THIS IS WHATS GOTTA BE FIXED.
         filepath = os.path.join(os.path.dirname(__file__), "config.yaml")
 
     # Otherwise return config
@@ -39,11 +37,15 @@ def get_prompt_preset(name: str, verbose: bool) -> str:
     if verbose:
         prompt_type = "verbose"
 
-    return prompt_presets[name][prompt_type]
+    return prompt_presets["init"] + prompt_presets[name][prompt_type]
 
 
-def display_message(sender, message) -> None:
-    formatted_message = Markdown("**" + sender + "**" + ":\n" + message)
+def display_message(sender="Someone", message="empty") -> None:
+    # "  \n" because markdown works with needs two whitespaces
+    formatted_message = Markdown(
+        "### " + sender + ":  \n" + message.replace("\n", "  \n")
+    )
+
     panel = Panel(formatted_message, border_style="yellow")
     console.print(panel)
 
