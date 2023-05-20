@@ -12,7 +12,7 @@ setup(
     author="masak1",
     # Version control
     name="aitility",
-    version="0.0.2",
+    version="0.0.3",
     description="AITility is an AI tool for your CLI.",
     long_description=readme,
     license=license,
